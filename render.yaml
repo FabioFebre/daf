@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: inventario-dafc
+    env: docker
+    plan: free
+    autoDeploy: true
+    dockerfilePath: ./Dockerfile
+    buildCommand: ""
+    startCommand: "./entrypoint.sh"     # <- Usa el script que corre migraciones + servidor
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: inventariodafc.settings
+      - key: PYTHONUNBUFFERED
+        value: 1
+      - key: DEBUG
+        value: "False"                   # ⚠️ Importantísimo para producción
+      - key: SECRET_KEY
+        value: tu_clave_secreta_aqui    # ⚠️ Cámbiala y que no esté en settings.py
