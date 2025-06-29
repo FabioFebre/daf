@@ -2,7 +2,7 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Instala dependencias del sistema para compilar mysqlclient
+# Instala dependencias del sistema
 RUN apt-get update && apt-get install -y \
     gcc \
     default-libmysqlclient-dev \
@@ -17,6 +17,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia el resto del proyecto
 COPY . .
+
+# Recoge los archivos estáticos para producción
+RUN python manage.py collectstatic --noinput
 
 RUN chmod +x /app/entrypoint.sh
 
