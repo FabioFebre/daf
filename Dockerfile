@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
 # Copia e instala dependencias de Python
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+COPY media/ /app/media/
 
 # Copia el resto del proyecto
 COPY . .
